@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
@@ -17,5 +18,13 @@ class IndexController extends AbstractController
             'name' => 'Kolya',
             'soname' => 'Shamrylo'
         ]);
+    }
+
+    /**
+     * @Route("/testAnnotation")
+     */
+    public function testAnnotation()
+    {
+        return new Response('<h1>This route defines by annotations!!</h1>');
     }
 }
