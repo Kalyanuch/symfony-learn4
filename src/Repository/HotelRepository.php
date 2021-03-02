@@ -21,13 +21,22 @@ class HotelRepository extends ServiceEntityRepository
 
     public function findAllBelowPrice(float $price): ?array
     {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.price < :price')
+//        return $this->createQueryBuilder('h')
+//            ->andWhere('h.price < :price')
+//            ->setParameter('price', $price)
+//            ->orderBy('h.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult();
+        $entityManager = $this->getEntityManager();
+
+        return $entityManager->createQuery(
+            'SELECT h
+            FROM APP\Entity\Hotel h
+            WHERE h.price < :price
+            ORDER BY h.id ASC')
             ->setParameter('price', $price)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+            ->execute();
     }
 
     // /**
