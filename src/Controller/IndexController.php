@@ -63,4 +63,20 @@ class IndexController extends AbstractController
     {
         return new Response('<h1>This route defines by annotations!!</h1>');
     }
+
+    /**
+     * @Route("/annotationWithMethods", methods={"GET"})
+     */
+    public function annotationWithMethods()
+    {
+        return new Response('<h1>This route defines by annotations with methods GET!!</h1>');
+    }
+
+    /**
+     * @Route("/annotationWithDifferentMethods", methods={"GET", "POST"})
+     */
+    public function annotationWithDifferentMethods()
+    {
+        return new Response('<h1>This route defines by annotations with methods GET or POST!!</h1>');
+    }
 }

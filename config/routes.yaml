@@ -5,7 +5,9 @@
 homepage:
   path: /
   controller: App\Controller\IndexController::home
+  methods: GET
 
 testJson:
   path: /testJson
   controller: App\Controller\IndexController::testJson
+  methods: GET|POST|PUT
