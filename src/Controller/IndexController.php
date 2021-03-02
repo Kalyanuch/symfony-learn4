@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Hotel;
 use App\Service\AgeCalculator;
 use App\Service\RandomNumberGenerator;
 use Psr\Log\LoggerInterface;
@@ -48,13 +49,18 @@ class IndexController extends AbstractController
             ],
         ];
 
+        $hotels = $this->getDoctrine()
+            ->getRepository(Hotel::class)
+            ->findAll();
+
         $logger->info('Homepage loaded');
 
         return $this->render('index.html.twig', [
             //'year' => random_int(0, 100),
             //'year' => $randomNumberGenerator->getRandomNumber(0, 100),
             'year' => $ageCalculator->calculateYearsToCurrent(self::HOTEL_OPENED),
-            'images' => $images
+            'images' => $images,
+            'hotels' => $hotels,
         ]);
     }
 
