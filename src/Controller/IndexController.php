@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Service\AgeCalculator;
 use App\Service\RandomNumberGenerator;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,7 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    public function home(LoggerInterface $logger, RandomNumberGenerator $randomNumberGenerator): Response
+    private const HOTEL_OPENED = 1969;
+
+    public function home(
+        LoggerInterface $logger,
+        RandomNumberGenerator $randomNumberGenerator,
+        AgeCalculator $ageCalculator
+    ): Response
     {
         //return new Response('<h1>Hello world!!</h1>');
 
@@ -45,7 +52,8 @@ class IndexController extends AbstractController
 
         return $this->render('index.html.twig', [
             //'year' => random_int(0, 100),
-            'year' => $randomNumberGenerator->getRandomNumber(0, 100),
+            //'year' => $randomNumberGenerator->getRandomNumber(0, 100),
+            'year' => $ageCalculator->calculateYearsToCurrent(self::HOTEL_OPENED),
             'images' => $images
         ]);
     }
